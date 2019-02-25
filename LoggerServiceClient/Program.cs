@@ -76,7 +76,15 @@ namespace LoggerServiceClient
                     DInfo = "FORWARD 20, LEFT 10, RIGHT 20"
                 };
 
-                for (long i = 0; i < 10000000; i++)
+                Random rnd = new Random();
+                int rnd_version = rnd.Next(1, 10);
+                log.SenderApp = "Autopilot v1." + rnd_version.ToString();
+
+                DateTime current = DateTime.Now;
+                log.Date = $"{current.Year}-{current.Month}-{current.Day} {current.Hour}:{current.Minute}:{current.Second}";
+
+
+                for (long i = 0; i < 1000; i++)
                 {
                     log.DInfo = i.ToString();
                     var url = await CreateLogAsync(log);
